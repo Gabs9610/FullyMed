@@ -81,6 +81,8 @@ class UsuarioDAO implements DAO<UsuarioModel> {
   Future<UsuarioModel?> findByCpf(String? cpf) async {
     var result = await _dbConfiguration
         .execQuery('SELECT * FROM FullyMed.usuarios where cpf = ?', [cpf]);
-    result.affectedRows == 0 ? null : UsuarioModel.fromCpf(result.first.fields);
+    return result.affectedRows == 0
+        ? null
+        : UsuarioModel.fromCpf(result.first.fields);
   }
 }
